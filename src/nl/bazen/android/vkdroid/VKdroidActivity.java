@@ -1,23 +1,23 @@
 package nl.bazen.android.vkdroid;
 
 import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 public class VKdroidActivity extends Activity {
     /** Called when the activity is first created. */
-    @Override
+    
+	private VKcrawler vk;
+	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -32,6 +32,12 @@ public class VKdroidActivity extends Activity {
 				return false;
 			}
 		});
+        
+        //ProgressDialog dialog = ProgressDialog.show(this, "", "Connecting to VK.com...", true);
+        
+        vk = new VKcrawler();
+        vk.login();
+        
     }
     
     @Override
