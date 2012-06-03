@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, VKdroidActivity!</string>
+    <string name="app_name">VKdroid</string>
+    <string name="app_description">VK.com media-crawler for Android</string>
+    <string name="search_placeholder">Search...</string>
+    <string name="search_description">Music on VK.com</string>
+    <string name="search">Search</string>
+    <string name="searchhint">Artist - Title</string>
+
+</resources>
