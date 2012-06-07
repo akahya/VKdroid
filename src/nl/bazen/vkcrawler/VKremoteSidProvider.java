@@ -38,7 +38,7 @@ public class VKremoteSidProvider extends VKsidProvider {
 					Log.d("vk","remote sid provider: found "+addCount);
 					p.onReady();
 				} catch (IOException e) {
-					p.onError();
+					p.onError("IOException occurred");
 				}
 			}
 		};

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 public class VKdroidActivity extends Activity implements StatusListener {
-    /** Called when the activity is first created. */
     
 	private VKcrawler vk;
 	private EditText searchBox;
@@ -29,6 +28,11 @@ public class VKdroidActivity extends Activity implements StatusListener {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        new VKdroid(this);
+        
+        this.vk = VKdroid.INSTANCE.getCrawler();
+        
         setContentView(R.layout.main);
         
         this.searchBox = (EditText) this.findViewById(R.id.editText1);
@@ -37,23 +41,19 @@ public class VKdroidActivity extends Activity implements StatusListener {
         this.resultview.setAdapter(resultviewadapter);
         this.resultviewadapter.addResult(new VKresult(null, "Froxic", "The Arising"));
         
-        this.vk = new VKcrawler(this);
-        
         if(vk.getSidProvider().initTakesAWhile()){
         	this.dialog = ProgressDialog.show(this, "", vk.getSidProvider().getInitMessage(), true);
         	vk.getSidProvider().addStatusListener(this);
         	this.busy = true;
         }
+        
         vk.addStatusListener(this);
         
         final VKcrawler vk = this.vk;
         this.searchBox.setOnEditorActionListener(new OnEditorActionListener() {
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if(!busy){
-					//if(actionId == EditorInfo.IME_ACTION_SEARCH){   //this cannot be tested on an emulator.
-						vk.search(v.getText().toString());
-					//}
-				}
+				if(!busy)
+					vk.search(v.getText().toString());
 				return false;
 			}
 		});

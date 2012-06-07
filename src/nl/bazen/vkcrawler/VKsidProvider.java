@@ -9,21 +9,18 @@ public abstract class VKsidProvider extends StatusObject {
 	public static final int STATUS_ERROR = 2;
 	
 	private boolean ready;
-	private boolean error;
 	
 	private boolean initTakesAWhile;
 	private String initMessage;
 	
 	public VKsidProvider(boolean initTakesAWhile){
 		this.ready = false;
-		this.error = false;
 		this.initTakesAWhile = initTakesAWhile;
 		this.initMessage = this.onInit();
 	}
 	
-	protected void onError(){
-		this.error = true;
-		this.changeCode(STATUS_ERROR);
+	protected void onError(String errorMsg){
+		this.change(STATUS_ERROR, errorMsg);
 	}
 	
 	protected void onReady(){

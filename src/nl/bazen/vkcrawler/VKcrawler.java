@@ -14,7 +14,9 @@ import org.jsoup.select.Elements;
 
 import android.util.Log;
 import android.widget.ListView;
+import nl.bazen.android.vkdroid.VKdroid;
 import nl.bazen.android.vkdroid.VKdroidActivity;
+import nl.bazen.android.vkdroid.VKdroidConfig;
 import nl.bazen.utils.StatusListener;
 import nl.bazen.utils.StatusObject;
 
@@ -28,18 +30,14 @@ public class VKcrawler extends StatusObject implements StatusListener {
 	private VKsidProvider p;
 	
 	private ArrayList<VKresult> results;
-	
 	private VKdroidActivity vkda;
-
-	public static final String PREDEF_SID = "5a6800c3c3ff61cce2c9e95721f3909801b38960cdb818025b648758e911";
 	
 	public static final String URL_SEARCH = "http://vkontakte.ru/gsearch.php?section=audio&q=%s&offset=0";
 
-	public VKcrawler(VKdroidActivity vkda) {
-		
-		this.p = new VKremoteSidProvider();
+	public VKcrawler() {
+		this.vkda = VKdroid.INSTANCE.getActivity();
+		this.p = new VKloginSidProvider(VKdroid.INSTANCE.getConfig().getValue(VKdroidConfig.K_USERNAME), VKdroid.INSTANCE.getConfig().getValue(VKdroidConfig.K_PASSWORD));
 		this.p.addStatusListener(this);
-		this.vkda = vkda;
 	}
 
 	public void onStatusChange(StatusObject o, int code, String message,
